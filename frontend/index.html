@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OptiManufact AI - Autonomous Manufacturing Planning & Scheduling System</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              750: '#233044',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="h-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased overflow-x-hidden transition-colors duration-200">
+
+  <!-- ================= AUTHENTICATION VIEW (LOGIN & REGISTRATION) ================= -->
+  <div id="authScreen" class="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-slate-950 relative overflow-hidden">
+    <!-- Ambient Backdrop Effects -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="w-full max-w-5xl rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl backdrop-blur-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 relative z-10">
+      
+      <!-- Left Panel: Industrial AI Brand & Value Highlights -->
+      <div class="lg:col-span-5 p-8 sm:p-10 bg-gradient-to-br from-blue-900/80 via-indigo-950 to-slate-900 text-white flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-800">
+        <div>
+          <!-- Logo -->
+          <div class="flex items-center space-x-3 mb-8">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/30 font-bold">
+              <i data-lucide="cpu" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <span class="font-extrabold text-xl tracking-tight">OptiManufact AI</span>
+              <span class="block text-[11px] text-blue-300 font-semibold uppercase tracking-wider">Autonomous Plant Suite</span>
+            </div>
+          </div>
+
+          <!-- Headline -->
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight mb-3">
+            Intelligent Production Planning for Modern Manufacturing
+          </h2>
+          <p class="text-xs text-slate-300 leading-relaxed mb-6">
+            Eliminate scheduling silos. Unify live customer orders, BOM inventory availability, machine capacity, and delivery SLAs with real-time AI optimization.
+          </p>
+
+          <!-- Core Value Points -->
+          <div class="space-y-3 text-xs text-slate-200">
+            <div class="flex items-start space-x-2.5">
+              <div class="p-1 rounded-lg bg-blue-500/20 text-blue-300 mt-0.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </div>
+              <span><strong>Autonomous Gantt Scheduling:</strong> Genetic algorithms solve complex machine constraints in seconds.</span>
+            </div>
+            <div class="flex items-start space-x-2.5">
+              <div class="p-1 rounded-lg bg-blue-500/20 text-blue-300 mt-0.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </div>
+              <span><strong>Predictive Stockout Radar:</strong> Automated 48h material alerts prevent shop-floor starvation.</span>
+            </div>
+            <div class="flex items-start space-x-2.5">
+              <div class="p-1 rounded-lg bg-blue-500/20 text-blue-300 mt-0.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </div>
+              <span><strong>1-Click Disruption Healing:</strong> Reroute around machine breakdowns with zero human guesswork.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust Footer -->
+        <div class="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
+          <span>Enterprise SLA: 99.98%</span>
+          <span class="text-emerald-400 font-semibold flex items-center space-x-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>AI Dispatch Engine Online</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Right Panel: Auth Forms (Login & Register) -->
+      <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center">
+        
+        <!-- Auth Tab Switcher -->
+        <div class="flex rounded-xl bg-slate-800/80 p-1 mb-6 border border-slate-700/60">
+          <button id="authTabLogin" class="flex-1 py-2 text-xs font-bold rounded-lg transition text-white bg-blue-600 shadow-md">
+            Sign In to Factory
+          </button>
+          <button id="authTabRegister" class="flex-1 py-2 text-xs font-semibold rounded-lg transition text-slate-400 hover:text-white">
+            Register New Account
+          </button>
+        </div>
+
+        <!-- Quick 1-Click Demo Profiles (For Instant Evaluation / Presentation) -->
+        <div class="mb-6 p-3.5 rounded-2xl bg-slate-800/50 border border-slate-700/60">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center space-x-1">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
+              <span>Quick 1-Click Demo Logins:</span>
+            </span>
+            <span class="text-[10px] text-slate-400">College Demo Ready</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <button onclick="App.handleQuickDemo('manager')" class="p-2 rounded-xl bg-slate-800 hover:bg-blue-900/40 border border-slate-700 hover:border-blue-500 transition text-left">
+              <span class="block text-xs font-bold text-blue-400 truncate">Plant Manager</span>
+              <span class="block text-[10px] text-slate-400 truncate">Rajesh Kumar</span>
+            </button>
+            <button onclick="App.handleQuickDemo('planner')" class="p-2 rounded-xl bg-slate-800 hover:bg-purple-900/40 border border-slate-700 hover:border-purple-500 transition text-left">
+              <span class="block text-xs font-bold text-purple-400 truncate">Prod. Planner</span>
+              <span class="block text-[10px] text-slate-400 truncate">Kavita Rao</span>
+            </button>
+            <button onclick="App.handleQuickDemo('operator')" class="p-2 rounded-xl bg-slate-800 hover:bg-emerald-900/40 border border-slate-700 hover:border-emerald-500 transition text-left">
+              <span class="block text-xs font-bold text-emerald-400 truncate">CNC Lead</span>
+              <span class="block text-[10px] text-slate-400 truncate">Arun Patel</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Form 1: Sign In -->
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Work Email Address</label>
+            <div class="relative">
+              <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              <input 
+                id="loginEmail" 
+                type="email" 
+                required 
+                value="manager@apexengineering.com"
+                placeholder="name@company.com" 
+                class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-700 bg-slate-800/90 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition" 
+              />
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs font-semibold text-slate-300">Password</label>
+              <a href="javascript:void(0)" onclick="App.showToast('Demo default password is: password123', 'info')" class="text-[11px] text-blue-400 hover:underline">Forgot password?</a>
+            </div>
+            <div class="relative">
+              <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              <input 
+                id="loginPassword" 
+                type="password" 
+                required 
+                value="password123"
+                placeholder="••••••••" 
+                class="w-full pl-9 pr-10 py-2.5 rounded-xl border border-slate-700 bg-slate-800/90 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition" 
+              />
+              <button type="button" onclick="App.togglePasswordVisibility('loginPassword', this)" class="absolute right-3 top-3 text-slate-400 hover:text-slate-200">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-slate-400">
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input type="checkbox" checked class="rounded border-slate-700 text-blue-600 focus:ring-0 bg-slate-800" />
+              <span>Remember this workstation</span>
+            </label>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold transition shadow-lg shadow-blue-500/25 flex items-center justify-center space-x-2"
+          >
+            <i data-lucide="log-in" class="w-4 h-4"></i>
+            <span>Sign In to Plant Dashboard</span>
+          </button>
+        </form>
+
+        <!-- Form 2: User Registration (Hidden initially) -->
+        <form id="registerForm" class="space-y-3.5 hidden">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name</label>
+            <div class="relative">
+              <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              <input 
+                id="regName" 
+                type="text" 
+                required 
+                placeholder="e.g. Ramesh Varma" 
+                class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-700 bg-slate-800/90 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Work Email</label>
+              <div class="relative">
+                <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+                <input 
+                  id="regEmail" 
+                  type="email" 
+                  required 
+                  placeholder="ramesh@factory.com" 
+                  class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-700 bg-slate-800/90 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Password</label>
+              <div class="relative">
+                <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+                <input 
+                  id="regPassword" 
+                  type="password" 
+                  required 
+                  minlength="6"
+                  placeholder="Min 6 characters" 
+                  class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-700 bg-slate-800/90 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Factory / Company Name</label>
+              <div class="relative">
+                <i data-lucide="building-2" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+                <input 
+                  id="regFactory" 
+                  type="text" 
+                  required 
+                  placeholder="e.g. Bharat Precision Ltd." 
+                  class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-700 bg-slate-800/90 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" 
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Your Operational Role</label>
+              <div class="relative">
+                <select 
+                  id="regRole" 
+                  class="w-full px-3 py-2 rounded-xl border border-slate-700 bg-slate-800 text-white text-xs focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                >
+                  <option value="Plant Operations Manager">Plant Operations Manager</option>
+                  <option value="Lead Production Planner">Lead Production Planner</option>
+                  <option value="Shop-Floor Supervisor">Shop-Floor Supervisor</option>
+                  <option value="CNC Machinist Lead">CNC Machinist Lead</option>
+                  <option value="Quality & Inventory Engineer">Quality & Inventory Engineer</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              class="w-full py-3 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-bold transition shadow-lg shadow-emerald-500/25 flex items-center justify-center space-x-2"
+            >
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+              <span>Create Account & Launch Dashboard</span>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN APPLICATION DASHBOARD ================= -->
+  <div id="appLayout" class="hidden flex flex-col h-full min-h-screen">
+    
+    <!-- Top Sticky Header -->
+    <header id="mainHeader" class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+      <!-- Populated dynamically by app.js -->
+    </header>
+
+    <!-- Main Workspace Container -->
+    <div class="flex flex-1 relative overflow-hidden">
+      
+      <!-- Left Navigation Sidebar -->
+      <aside id="mainSidebar" class="sidebar w-64 flex-shrink-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 hidden lg:block overflow-y-auto transition-all">
+        <!-- Populated dynamically by app.js -->
+      </aside>
+
+      <!-- Main Dynamic Content Canvas -->
+      <main class="main-content flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
+        <div id="tabContentContainer" class="max-w-7xl mx-auto space-y-6">
+          <!-- Active Tab Content dynamically rendered here -->
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Sliding Notification Drawer -->
+  <div id="notificationDrawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-slate-900 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800 flex flex-col">
+    <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="bell" class="w-5 h-5 text-blue-600"></i>
+        <h3 class="font-bold text-slate-900 dark:text-white text-base">Alerts & Notifications</h3>
+      </div>
+      <button id="closeNotificationBtn" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+    <div id="notificationList" class="flex-1 overflow-y-auto">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- User Profile Dropdown Menu (Fixed / Popover) -->
+  <div id="userProfileMenu" class="fixed top-16 right-4 sm:right-6 w-80 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 hidden animate-in">
+    <!-- Populated dynamically by app.js -->
+  </div>
+
+  <!-- College Project Evaluation / Viva Guide Modal -->
+  <div id="vivaModal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-800 w-full max-w-4xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 p-6 relative overflow-hidden animate-in">
+      <div id="vivaModalContent">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic Modal (BOM Details, New Order Simulation, Share Modal) -->
+  <div id="genericModal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-800 w-full max-w-xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 p-6 relative overflow-hidden">
+      <div id="genericModalContent">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notification Container -->
+  <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none max-w-sm w-full">
+    <!-- Dynamic Toasts -->
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/scheduler.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

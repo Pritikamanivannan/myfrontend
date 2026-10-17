@@ -1,0 +1,204 @@
+/* 
+ * OptiManufact AI - Custom Industrial Design System
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.7);
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+/* Live Pulse Badges */
+.live-beacon {
+  position: relative;
+  display: inline-flex;
+}
+.live-beacon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: beacon-pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes beacon-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.warning-beacon::before {
+  background-color: #f59e0b;
+  box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  animation: warning-pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes warning-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+.danger-beacon::before {
+  background-color: #ef4444;
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  animation: danger-pulse 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes danger-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* Gantt Chart Custom Layout */
+.gantt-container {
+  overflow-x: auto;
+  position: relative;
+  background-image: linear-gradient(to right, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+  background-size: 80px 100%;
+}
+
+.gantt-timeline-track {
+  display: flex;
+  min-width: 1200px;
+  position: relative;
+}
+
+.gantt-hour-marker {
+  width: 80px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  border-right: 1px dashed rgba(148, 163, 184, 0.25);
+}
+
+.gantt-lane {
+  position: relative;
+  height: 64px;
+  min-width: 1200px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  display: flex;
+  align-items: center;
+}
+
+.gantt-job-block {
+  position: absolute;
+  height: 48px;
+  border-radius: 8px;
+  border-left-width: 4px;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gantt-job-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -2px rgba(0,0,0,0.12);
+  z-index: 20;
+}
+
+/* Critical Ratio Badge Glow */
+.cr-critical {
+  animation: cr-glow 1.5s infinite alternate;
+}
+
+@keyframes cr-glow {
+  from {
+    border-color: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+  }
+  to {
+    border-color: #b91c1c;
+    box-shadow: 0 0 16px rgba(239, 68, 68, 0.6);
+  }
+}
+
+/* Operator Tablet Mode */
+.kiosk-mode .sidebar {
+  display: none;
+}
+.kiosk-mode .main-content {
+  margin-left: 0 !important;
+  padding: 1rem !important;
+}
+
+/* Toast Notification animations */
+.toast-slide-in {
+  animation: toast-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
